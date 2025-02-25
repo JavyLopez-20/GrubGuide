@@ -1,0 +1,23 @@
+{
+  "name": "grubguide",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run client:build && npm run server",
+    "server": "cd server && npm run start",
+    "client:build": "cd client && npm run build",
+    "build": "cd client && npm run build",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Javier Lopez",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mongodb": "^6.13.1",
+    "mongoose": "^8.10.1",
+    "nodemon": "^3.1.9"
+  }
+}
