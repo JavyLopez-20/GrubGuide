@@ -17,9 +17,9 @@ mongoose.connect(process.env.ATLASURI,)
   .catch(err => console.log(err));
 
 // Routes
-app.get('/api/restaurants', (req, res) => {
-  res.json([{ name: 'Taco Haven', cuisine: 'Mexican' }]);
-});
+// app.get('/api/restaurants', (req, res) => {
+//   res.json([{ name: 'Taco Haven', cuisine: 'Mexican' }]);
+// });
 
 // Start Server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

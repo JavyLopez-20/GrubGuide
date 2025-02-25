@@ -1,7 +1,7 @@
 {
   "name": "grubguide",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "npm run client:build && npm run server",
     "server": "cd server && npm run start",
