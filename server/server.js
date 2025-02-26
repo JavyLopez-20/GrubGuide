@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-import routes from "./routes/api"
 const cors = require('cors');
 require('dotenv').config();
 
