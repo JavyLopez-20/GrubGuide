@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const restaurantSchema = new mongoose.model({
+const restaurantSchema = new mongoose.Schema({
     yelpId: { type: String, required: true, unique: true},
 
     name: { type: String, required: true},
@@ -20,4 +20,4 @@ const restaurantSchema = new mongoose.model({
     imageUrl: { type: String, required: true },
 });
 
-module.exports = mongoose.model("restaurant", restaurantSchema);
+module.exports = mongoose.model("Restaurant", restaurantSchema);

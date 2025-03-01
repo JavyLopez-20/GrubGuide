@@ -1,5 +1,4 @@
 const yelp = require('yelp-fusion');
-const restaurant = require('../models/restaurant');
 const yelpClient = yelp.client(process.env.YELP_API_KEY);
 
 exports.searchRestaurants = async (req, res) => {
