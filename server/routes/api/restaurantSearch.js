@@ -1,7 +1,8 @@
 const express = require('express');
 const { searchRestaurant } = require('../../controllers/restaurantSearch');
-const router = express.Router();
 
-router.get('/search', searchRestaurant);
+const restaurantRouter = express.Router();
 
-export { router as restaurantRouter };
+restaurantRouter.get('/search', searchRestaurant);
+
+module.exports = { restaurantRouter };
