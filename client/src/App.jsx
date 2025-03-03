@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-const login = require('./pages/loginPage');
+import Home from "./pages/homePage";
 
 function App () {
     return(
         <BrowserRouter>
         <Routes>
-            <Route path="/login" element={<login />}></Route>
+            <Route path="/" element={<Home />}></Route>
         </Routes>
         </BrowserRouter>
     )
