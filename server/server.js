@@ -16,6 +16,6 @@ mongoose.connect(process.env.ATLASURI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
-app.use(routes);
+  app.use(routes);
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

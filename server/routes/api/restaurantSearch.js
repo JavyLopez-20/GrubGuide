@@ -1,8 +1,8 @@
-const express = require('express');
-const { searchRestaurant } = require('../../controllers/restaurantSearch');
+// const express = require('express');
+// const { searchRestaurant } = require('../../controllers/restaurantSearch.js');
 
-const restaurantRouter = express.Router();
+// const restaurantRouter = express.Router();
 
-restaurantRouter.get('/search', searchRestaurant);
+// restaurantRouter.get('/search', searchRestaurant);
 
-module.exports = { restaurantRouter };
+// module.exports = { restaurantRouter };

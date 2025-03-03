@@ -7,4 +7,5 @@ const userSchema = new mongoose.Schema({
     favorites: [{ type: mongoose.Schema.Types.ObjectId }],
 });
 
-module.exports = mongoose.model("User", userSchema);
+const userModel = mongoose.model("User", userSchema);
+module.exports = userModel;
