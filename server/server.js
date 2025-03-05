@@ -19,13 +19,7 @@ mongoose.connect(process.env.ATLASURI)
   .catch(err => console.log(err));
 
   app.use(routes);
-
-  app.get('/home',() => {
-    console.log('Were home')
-  });
-  app.get("/api/front", (req, res) => {
-    res.json({ message: 'hello from the backend' })
-  });
+  
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
   });

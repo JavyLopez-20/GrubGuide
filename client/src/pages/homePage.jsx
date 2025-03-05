@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import Searchbar from "../components/Searchbar";
 import CuisineCard from "../components/Cuisinecard";
 
@@ -42,7 +41,5 @@ const cuisines = [
     </div>
     );
 };
-
-console.log('homePage is rendering');
 
 export default Home;

@@ -8,8 +8,6 @@ import UserProfile from "./pages/userPage";
 import RestaurantDetails from "./pages/restaurantDetailsPage";
 import Navbar from "./components/Navbar";
 
-console.log('App is rendering')
-
 const App = () => {
     return(
         <Router>
