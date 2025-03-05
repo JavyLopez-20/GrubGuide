@@ -1,12 +1,12 @@
 const express = require('express');
 const { authRouter } = require("./auth");
-// const { restaurantRouter } = require("./restaurantSearch.js");
-// const { userRouter } = require("./user");
+const { favoritesRouter } = require("./favorites");
+const { profileRouter } = require('./profile');
 
 const router = express.Router();
 
 router.use('/auth', authRouter);
-// router.use('/restaurantSearch', restaurantRouter);
-// router.use('/user', userRouter);
+router.use('/favorites', favoritesRouter);
+router.use('/profile', profileRouter)
 
 module.exports = router;

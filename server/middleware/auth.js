@@ -13,6 +13,6 @@ exports.authenticateUser = (req, res, next) => {
         next();
     }
     catch (error) {
-        res.status(400).json({ message: 'no token' })
+        res.status(401).json({ message: 'no token' })
     }
 };

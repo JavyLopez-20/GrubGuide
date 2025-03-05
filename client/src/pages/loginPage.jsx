@@ -1,7 +1,7 @@
-const react = require('react');
+import React from "react";
 
 function Login () {
     
 };
 
-module.exports = Login;
+export default Login;
