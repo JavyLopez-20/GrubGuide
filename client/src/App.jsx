@@ -11,19 +11,6 @@ import Navbar from "./components/Navbar";
 console.log('App is rendering')
 
 const App = () => {
-    useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const response = await fetch('/api/front');
-            const data =  await response.json();
-            console.log(data)
-        } catch (error) {
-            console.error('Error fetching data', error)
-        }
-    };
-    fetchData();
-    }, []);
-
     return(
         <Router>
             <Navbar />
