@@ -31,7 +31,6 @@ const cuisines = [
 
     return (
     <div>
-        <Navbar />
         <Searchbar />
         <h1>Welcome to GrubGuide</h1>
         {error && <p>Error: {error}</p>}
