@@ -1,5 +1,3 @@
-import { query } from "express";
-import { set } from "mongoose";
 import React, { useState } from "react";
 
 const Searchbar = () => {
