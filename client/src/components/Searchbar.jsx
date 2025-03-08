@@ -1,30 +1,43 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
 
-const Searchbar = () => {
-   const [query, setQuery] = useState('');
+// const SearchBar = () => {
+//     const [ error, setError ] = useState('');
+//     const navigate = useNavigate();
+//     const [searchTerm, setSearchTerm] = useState('');
+//     const [manualLocation, setManualLocation] = useState('');
+    
+//     const getLocation = (onSuccess) => {
+//     if (navigator.geoLocation) {
+//         navigator.geolocation.getCurrentPosition(
+//             (position) => {
+//             const { latitude, longitude } = position.coords;
+//             onSuccess(latitude, longitude);
+//         },
+//         (err) => {
+//     setError('Unable to retrieve location')
+//     console.error('Error with geolocation', error);
+//         }
+//     )
+//     } else {
+//         setError('GeoLocation not supported by browser')
+//     }
+// };
+//    const handleSearch = () => {
+//         fetch(`api/search?term=${searchTerm}&latitude=${lat}&longitude=${long}`)
+//         .then((response) => response.json())
+//         .then((data) => {
+//             navigate('/search-results',{ state: { restaurants: data } })
+//         })
+// };
+// const handleManualSearch = () => {
+//         fetch(`/api/search?term=${term}&location=${manualLocation}`)
+//         .then((response) => response.json())
+//         .then((data) => {
+//             navigator('/search-results',{ state: { restaurants: data }})
+//         })
+// };
 
-   const handleSearch = async () => {
-    const response = await fetch(`https://api.yelp.com/v3/business/search?term=${query}&location=your_location`,
-        {
-            headers: {
-                Authorization: `Bearer ${process.env.YELP_API_KEY}`,
-            },
-        })
-    const data = await response.json();
-    console.log(data);
-    };
-
-   return (
-    <div>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search for cuisines or restaurants"
-      />
-      <button onClick={handleSearch}>Search</button>
-    </div>
-  );
-};
-
-export default Searchbar;
+// return { handleSearch, handleManualSearch ,getLocation, error }
+// };
+// export default SearchBar;

@@ -13,7 +13,7 @@ exports.getFavorites = async (req, res) => {
 };
 
 exports.addFavorite = async (req, res) => {
-  const { userId,restaurantId } = req.body;
+  const { userId, restaurantId } = req.body;
 
   try {
     const user = await User.findById(req.userId);
