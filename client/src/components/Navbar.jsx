@@ -14,64 +14,41 @@ import {
   MenuTrigger,
 } from "../components/ui/menu"
   import { FaHamburger } from "react-icons/fa";
-  import { FaSearch } from "react-icons/fa";
+  import { FaSearch } from "react-icons/fa";   
 
 const Navbar = () => {
-    const [searchTerm, setSearchTerm] = useState('');
-    const [manualLocation, setManualLocation] = useState('');
+    const [term, setTerm] = useState('');
+    const [location, setLocation] = useState('');
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false)
 
     const handleSearchNearMe = async () => {
-        if (!navigator.geolocation) {
-           console.error('Geolocation is not supported by this browser')
-          }
-          setLoading(true);
-
+          if (navigator.geolocation) {
           navigator.geolocation.getCurrentPosition(
             async (position) => {
               const { latitude, longitude } = position.coords;
-                try {
-                    const response = await fetch(`/api/search?term=${searchTerm}&latitude=${latitude}&longitude=${longitude}`)
-                    if (!response.ok) {
-                        throw new Error(`Error: ${response.statusText}`)
-                    }
-                    const data = await response.json();
-                    navigate('/search-results',  { state: { restaurants: data } });
-                } catch (error) {
-                    console.error(`Error fetching restaurants`, error)
-                } finally {
-                    setLoading(false);
-                }
+                navigate(`/results?term=${term}&lat=${latitude}&lon=${longitude}`)
           },
           (error) => {
             console.error('Error getting location:', error);
-            setLoading(false);
         }
         );
-      };
+      }
+      else {
+        alert('Geolocaton is not supported by this browser')
+      }
+    };
 
     const handleSearchByLocation = async () => {
-        if (!searchTerm || !manualLocation) {
-          console.error(`Search term and location are required`)
+        if (term && location) {
+          navigate(`/results?term=${term}&location=${location}`)
         }
-        setLoading(true);
-        try {
-            const response = await fetch(`/api/search?term=${searchTerm}&location=${manualLocation}`);
-            if (!response.ok) {
-                throw new Error(`Error: ${response.statusText}`)
-            }
-            const data = await response.json();
-            navigate('/search-results', { state: { restaurants: data }});
-        } catch (error) {
-            console.error(`Error fetching restaurants`, error)
-        } finally {
-            setLoading(false)
+        else {
+            alert('Please enter term and location')
         }
     };
 
     return(
-        <Box bg="teal.500" px={4}>
+        <Box bg="teal.500" px={4} onSubmit={(e) => e.preventDefault()}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
         {/* Logo */}
         <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -83,16 +60,16 @@ const Navbar = () => {
         <Flex alignItems="center" flex={1} mx={4}>
           <Input
             placeholder="Search restaurant or cuisine"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
             bg="white"
             color="black"
             mr={2}
           />
           <Input
             placeholder="Enter location"
-            value={manualLocation}
-            onChange={(e) => setManualLocation(e.target.value)}
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
             bg="white"
             color="black"
             mr={2}

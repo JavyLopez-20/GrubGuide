@@ -9,6 +9,6 @@ const router = express.Router();
 router.use('/auth', authRouter);
 router.use('/favorites',favoritesRouter);
 router.use('/profile', profileRouter);
-router.use('/yelp', yelpRouter);
+router.use('/results', yelpRouter);
 
 module.exports = router;

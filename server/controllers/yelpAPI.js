@@ -3,8 +3,8 @@ const Restaurant = require('../db/restaurant');
 const yelpAPI = async (req, res) => {
 
     const { term, latitude, longitude, location } = req.query;
-    if (!term || !latitude || !longitude || !location)  {
-        return res.status(400).json({ error: 'Missing either term, latitude, longitude, or location' })
+    if (!term)  {
+        return res.status(400).json({ error: 'Missing Restaurant/Cuisine' })
     }
 
     try {
@@ -22,7 +22,7 @@ const yelpAPI = async (req, res) => {
           }
 
         const data = await response.json();
-        res.json(data.businesses);
+        res.json(data);
      } catch (error) {
         console.error('Error fetching data from Yelp:', error);
     res.status(500).json({ error: 'Failed to fetch data from Yelp' });

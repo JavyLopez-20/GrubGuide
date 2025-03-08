@@ -2,10 +2,7 @@ import CuisineCard from "../components/Cuisinecard";
 import React from "react";
 
 const Home = () => {
-    const cuisines = [
-        { name: 'Mexican', image: '' },
-        { name: 'Italian', image: '' },
-      ]
+    const cuisines = []
   return (
     <div>
       <h1>Welcome to GrubGuide</h1>
