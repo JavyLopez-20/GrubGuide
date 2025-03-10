@@ -21,7 +21,11 @@
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.13.1",
     "mongoose": "^8.10.1",
+    "node-fetch": "^3.3.2",
     "nodemon": "^3.1.9",
     "prettier": "^3.5.3"
+  },
+  "devDependencies": {
+    "@chakra-ui/cli": "^3.11.0"
   }
 }

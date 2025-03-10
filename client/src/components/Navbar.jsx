@@ -6,6 +6,10 @@ import {
     Input,
     Button,
     IconButton,
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
   } from '@chakra-ui/react';
 import {
   MenuContent,
@@ -13,12 +17,14 @@ import {
   MenuRoot,
   MenuTrigger,
 } from "../components/ui/menu"
-  import { FaHamburger } from "react-icons/fa";
-  import { FaSearch } from "react-icons/fa";   
+  import { FaHamburger, FaSearch, FaUserCircle } from "react-icons/fa";
+  import { useAuth } from "./Auth";
+
 
 const Navbar = () => {
     const [term, setTerm] = useState('');
     const [location, setLocation] = useState('');
+    const { user, logout } = useAuth();
     const navigate = useNavigate();
 
     const handleSearchNearMe = async () => {
@@ -83,18 +89,25 @@ const Navbar = () => {
         </Flex>
         
         {/* Login/Register Links */}
-        <Flex alignItems="center">
-          <Link to="/login">
-            <Button colorScheme="teal" variant="ghost" mr={2}>
-              Login
-            </Button>
-          </Link>
-          <Link to="/register">
-            <Button colorScheme="teal" variant="solid">
-              Register
-            </Button>
-          </Link>
         </Flex>
+      <Flex align="center">
+        {user ? (
+          <Menu>
+            <MenuButton
+              as={IconButton}
+              icon={<FaUserCircle />}
+              aria-label="Profile"
+              variant="ghost"
+            />
+            <MenuList>
+              <MenuItem onClick={() => navigate('/profile')}>View Profile</MenuItem>
+              <MenuItem onClick={() => navigate('/preferences')}>Edit Preferences</MenuItem>
+              <MenuItem onClick={logout}>Logout</MenuItem>
+            </MenuList>
+          </Menu>
+        ) : (
+          <Button onClick={() => navigate('/register')}>Register</Button>
+        )}
 
         {/* Mobile Menu */}
         <Box display={{ base: 'block', md: 'none' }}>

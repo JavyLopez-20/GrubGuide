@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Grid, Image, Text, VStack } from '@chakra-ui/react';
+import { Box, Image, Text, Heading, Flex, Badge, VStack, Link as ChakraLink } from '@chakra-ui/react';
 import { useSearchParams } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 const SearchResultsPage = () => {
   const [searchParams] = useSearchParams();
@@ -38,24 +39,53 @@ const SearchResultsPage = () => {
 
 
   return (
-    <Box p={4}>
-      <Text fontSize="2xl" fontWeight="bold" mb={4}>
-        Search Results for {term} in {location}
-      </Text>
-      <Grid templateColumns={{ base: '1fr', md: 'repeat(3, 1fr)' }} gap={6}>
+    <VStack spacing={4} p={4}>
         {results.map((business) => (
-          <Box key={business.id} borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Image src={business.image_url} alt={business.name} />
-            <VStack p={4} align="start">
-              <Text fontWeight="bold">{business.name}</Text>
-              <Text>{business.location.address},{business.location.city}</Text>
-              <Text>Rating: {business.rating}</Text>
-              <Text>Cuisine: {business.cuisine}</Text>
-            </VStack>
-          </Box>
-        ))}
-      </Grid>
-    </Box>
+            <ChakraLink
+            key={business.id}
+            as={RouterLink}
+            to={`/restaurant/${business.id}`}
+            _hover={{ textDecoration: 'none' }}
+            >
+            <Box
+                borderWidth="1px"
+                borderRadius="lg"
+                overflow="hidden"
+                bg="white"
+                p={4}
+                boxShadow="md"
+                _hover={{ boxShadow: 'lg', transform: 'scale(1.02)' }}
+                transition="all 0.2s"
+            >
+                <Image
+                    src={business.image_url}
+                    alt={business.name}
+                    fallbackSrc="https://via.placeholder.com/150"
+                    objectFit="cover"
+                    height="150px"
+                    width="100%"
+                />
+                <VStack p={4} align="start" spacing={2}>
+                    <Heading as="h3" size="md" color="gray.800">
+                        {business.name}
+                    </Heading>
+                    <Text fontSize="sm" color="gray.600">
+                        {business.location.address1}, {business.location.city}
+                    </Text>
+                    <Flex justifyContent="space-between" alignItems="center" width="100%">
+                        <Badge colorScheme="green" fontSize="sm">
+                            {business.rating} stars
+                        </Badge>
+                        <ChakraLink href={business.url} color="blue.500" isExternal>
+                            View on Yelp
+                        </ChakraLink>
+                    </Flex>
+                </VStack>
+            </Box>
+            </ChakraLink>
+        )
+        )};
+    </VStack>
   );
 };
 
