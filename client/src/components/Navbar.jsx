@@ -6,10 +6,6 @@ import {
     Input,
     Button,
     IconButton,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
   } from '@chakra-ui/react';
 import {
   MenuContent,
@@ -92,21 +88,26 @@ const Navbar = () => {
         </Flex>
       <Flex align="center">
         {user ? (
-          <Menu>
-            <MenuButton
+          <MenuRoot>
+            <MenuTrigger>
+            <Button
               as={IconButton}
               icon={<FaUserCircle />}
               aria-label="Profile"
               variant="ghost"
             />
-            <MenuList>
+            </MenuTrigger>
+            <MenuContent>
               <MenuItem onClick={() => navigate('/profile')}>View Profile</MenuItem>
               <MenuItem onClick={() => navigate('/preferences')}>Edit Preferences</MenuItem>
               <MenuItem onClick={logout}>Logout</MenuItem>
-            </MenuList>
-          </Menu>
+            </MenuContent>
+          </MenuRoot>
         ) : (
+        <Box>
           <Button onClick={() => navigate('/register')}>Register</Button>
+          <Button onClick={() => navigate('/login')}>Login</Button>
+        </Box>
         )}
 
         {/* Mobile Menu */}
