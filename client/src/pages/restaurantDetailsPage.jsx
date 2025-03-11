@@ -15,18 +15,24 @@ import { Box,
 
 const RestaurantDetails = () => {
     const [business, setBusiness] = useState(null);
-    const { id } = useParams();
+    const { businessId } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchBusinessDetails = async () => {
-
+            const fetchBusinessDetails = async () => {
             setLoading(true);
             setError(null);
-
+            const url = `https://api.yelp.com/v3/businesses/${businessId}`;
+            const options = {
+            method: 'GET',
+            headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${process.env.YELP_API_KEY}`
+            }
+            };
             try {
-                const response = await fetch(`/api/results/restaurant/${id}`);
+                const response = await fetch(url, options);
                 if (!response.ok) {
                     const errorText = await response.text();
                     throw new Error(`Failed to fetch business details: ${errorText} - ${response.statusText}`);
@@ -40,7 +46,7 @@ const RestaurantDetails = () => {
             }
         };
         fetchBusinessDetails();
-    }, [id]);
+    }, [businessId]);
     if (loading) {
         return (
             <Center minH="100vh">
@@ -66,7 +72,7 @@ const RestaurantDetails = () => {
         <Box minH="100vh" bg="gray.50" p={6}>
             <VStack spacing={6} align="stretch"
             maxW="800px" mx="auto">
-                <Heading as="h1" size="2x1" 
+                <Heading as="h1" size="2xl" 
                 color="teal.600">
                     {business.name}
                     </Heading>
@@ -82,6 +88,16 @@ const RestaurantDetails = () => {
                 <Text fontSize="lg" color="gray.600">{business.location.address1}, {business.location.city}</Text>
                 <Text fontSize="lg" color="gray.600">Rating: {business.rating}</Text>
                 <Text fontSize="lg" color="gray.600">Price: {business.price}</Text>
+                <Text fontSize="lg" color="gray.600">Phone: {business.phone} </Text>
+                <Text fontSize="lg" color="gray.600">Reviews: {business.review_count}</Text>
+                <Text fontSize="lg" color="gray.600">Description: {business.categories?.map(cat => cat.title).join(', ') || 'N/A'}</Text>
+                <Text fontSize="lg" color="gray.600">Hours:</Text>
+                {business.hours && business.hours[0].open.map((hours) => (
+                    <Text key={hours.day} fontSize="lg" color="gray.600">
+                        {`Day: ${hours.day}, Start: ${hours.start}, End: ${hours.end}`}
+                    </Text>
+                ))}
+                <Text fontSize="lg" color="gray.600">Website: {business.url}</Text>
                 <Flex justifyContent="space-between" alignItems="center">
                     <Badge colorScheme="green" fontSize="md">{business.categories.map((cat) => cat.title).join(', ')}</Badge>
                     <ChakraLink href={business.url} color="blue.500" isExternal>View on Yelp</ChakraLink>

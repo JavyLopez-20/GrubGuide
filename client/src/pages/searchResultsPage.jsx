@@ -44,7 +44,7 @@ const SearchResultsPage = () => {
             <ChakraLink
             key={business.id}
             as={RouterLink}
-            to={`/restaurant/${business.id}`}
+            to={`/business/${business.id}`}
             _hover={{ textDecoration: 'none' }}
             >
             <Box
@@ -84,7 +84,7 @@ const SearchResultsPage = () => {
             </Box>
             </ChakraLink>
         )
-        )};
+        )}
     </VStack>
   );
 };
