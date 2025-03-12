@@ -27,8 +27,11 @@ const RestaurantDetails = () => {
             const options = {
             method: 'GET',
             headers: {
-            accept: 'application/json',
-            Authorization: `Bearer ${process.env.YELP_API_KEY}`
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Credentials': true,
+            Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
             }
             };
             try {
@@ -90,7 +93,6 @@ const RestaurantDetails = () => {
                 <Text fontSize="lg" color="gray.600">Price: {business.price}</Text>
                 <Text fontSize="lg" color="gray.600">Phone: {business.phone} </Text>
                 <Text fontSize="lg" color="gray.600">Reviews: {business.review_count}</Text>
-                <Text fontSize="lg" color="gray.600">Description: {business.categories?.map(cat => cat.title).join(', ') || 'N/A'}</Text>
                 <Text fontSize="lg" color="gray.600">Hours:</Text>
                 {business.hours && business.hours[0].open.map((hours) => (
                     <Text key={hours.day} fontSize="lg" color="gray.600">

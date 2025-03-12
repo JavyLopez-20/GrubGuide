@@ -14,7 +14,7 @@ const yelpAPI = async (req, res) => {
         {
             method: 'GET',
             headers: {
-                Authorization: `Bearer ${process.env.YELP_API_KEY}`,
+                Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`,
             },
         });
         if (!response.ok) {

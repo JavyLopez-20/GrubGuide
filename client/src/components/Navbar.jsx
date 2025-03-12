@@ -14,13 +14,13 @@ import {
   MenuTrigger,
 } from "../components/ui/menu"
   import { FaHamburger, FaSearch, FaUserCircle } from "react-icons/fa";
-  import { useAuth } from "./Auth";
+//   import { useAuth } from "./Auth";
 
 
 const Navbar = () => {
     const [term, setTerm] = useState('');
     const [location, setLocation] = useState('');
-    const { user, logout } = useAuth();
+    // const { user, logout } = useAuth();
     const navigate = useNavigate();
 
     const handleSearchNearMe = async () => {
@@ -87,7 +87,7 @@ const Navbar = () => {
         {/* Login/Register Links */}
         </Flex>
       <Flex align="center">
-        {user ? (
+        {/* {user ? (
           <MenuRoot>
             <MenuTrigger>
             <Button
@@ -103,12 +103,12 @@ const Navbar = () => {
               <MenuItem onClick={logout}>Logout</MenuItem>
             </MenuContent>
           </MenuRoot>
-        ) : (
+        ) :  */}
         <Box>
           <Button onClick={() => navigate('/register')}>Register</Button>
           <Button onClick={() => navigate('/login')}>Login</Button>
         </Box>
-        )}
+        {/* } */}
 
         {/* Mobile Menu */}
         <Box display={{ base: 'block', md: 'none' }}>

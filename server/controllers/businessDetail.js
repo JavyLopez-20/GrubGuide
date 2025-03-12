@@ -1,10 +1,12 @@
 const businessDetail = async (req, res) => {
-    const url = `https://api.yelp.com/v3/businesses/${req.params.id}`;
+    const businessId = req.params.id;
+    console.log('Fetching business details for ID:', businessId);
+
+    const url = `https://api.yelp.com/v3/businesses/${businessId}`;
         const options = {
         method: 'GET',
         headers: {
-        accept: 'application/json',
-        authorization: `Bearer ${process.env.YELP_API_KEY}`
+        Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
         }
     }
     try {

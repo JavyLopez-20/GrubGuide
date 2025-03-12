@@ -2,7 +2,7 @@ import React from 'react';
 import { Flex, Box, VStack, Heading, Text, Avatar, Button } from '@chakra-ui/react';
 import { FaUserEdit, FaUpload, FaCog, FaGift, FaSignOutAlt } from 'react-icons/fa';
 
-const userProfile = () => {
+const UserProfile = () => {
   return (
     <Flex minH="100vh" p={4}>
       {/* Left Sidebar */}
@@ -35,4 +35,4 @@ const userProfile = () => {
   );
 };
 
-export default userProfile;
+export default UserProfile;
