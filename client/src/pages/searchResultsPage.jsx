@@ -44,7 +44,7 @@ const SearchResultsPage = () => {
             <ChakraLink
             key={business.id}
             as={RouterLink}
-            to={`/business/${business.id}`}
+            to={`/${business.id}`}
             _hover={{ textDecoration: 'none' }}
             >
             <Box

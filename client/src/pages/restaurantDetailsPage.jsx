@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Box,
     Heading,
     Text,
@@ -21,7 +21,7 @@ const RestaurantDetails = () => {
 
     useEffect(() => {
             const fetchBusinessDetails = async () => {
-            const url = `/api/business/${businessId}`;
+            const url = `/api/results/business/${businessId}`;
             const options = {
                 method: 'GET',
                 headers: {
@@ -30,6 +30,7 @@ const RestaurantDetails = () => {
             };
             setLoading(true);
             setError(null);
+            console.log('Fetching business details for ID:', businessId);
 
             try {
                 const response = await fetch(url, options);
