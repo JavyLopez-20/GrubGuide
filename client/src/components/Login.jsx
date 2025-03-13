@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
     Box,
@@ -11,6 +11,7 @@ import {
     Field,
 } from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from './Auth';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -18,25 +19,35 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const { login } = useContext(AuthContext);
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        setError(null);
+    const handleLogin = async () => {
             const response = await fetch(`/api/auth/login`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: {'Content-Type': 'application/json',},
                 body: JSON.stringify({ email, password }),
             });
             const data = await response.json();
             if (!response.ok) {
                 throw new Error(data.message || 'Login failed');
             }
-            localStorage.setItem('authToken', data.token);
+            if (data.token) {
+            login(data.token)
             navigate('/profile');
-    }
+            } else {
+                console.error('Login failed:', data);
+            }
+        }
+        const handleSubmit = async (e) => {
+            e.preventDefault();
+            setLoading(true);
+            setError(null);
+            const credentials = {
+                email: e.target.value,
+                password: e.target.value,
+              };
+              handleLogin(credentials)
+        }
     return (
         <Box maxW="400px" mx="auto" mt={10} p={4}>
             <VStack spacing={4}>

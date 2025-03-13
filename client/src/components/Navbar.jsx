@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
     Box,
     Flex,
     Input,
+    Text,
     Button,
     IconButton,
   } from '@chakra-ui/react';
@@ -14,12 +15,14 @@ import {
   MenuTrigger,
 } from "../components/ui/menu"
   import { FaHamburger, FaSearch, FaUserCircle } from "react-icons/fa";
+  import { AuthContext } from "./Auth";
 
 
 const Navbar = () => {
     const [term, setTerm] = useState('');
     const [location, setLocation] = useState('');
     const navigate = useNavigate();
+    const { isLoggedIn, userData, logout } = useContext(AuthContext);
 
     const handleSearchNearMe = async () => {
           if (navigator.geolocation) {
@@ -85,7 +88,7 @@ const Navbar = () => {
         {/* Login/Register Links */}
         </Flex>
       <Flex align="center">
-        {/* {isLoggedIn ? (
+        {isLoggedIn ? (
           <MenuRoot>
             <MenuTrigger>
             <Button
@@ -95,18 +98,21 @@ const Navbar = () => {
               variant="ghost"
             />
             </MenuTrigger>
+            <Text color="white" ml={2}>
+              Welcome {userData.username}
+            </Text>
             <MenuContent>
               <MenuItem onClick={() => navigate('/profile')}>View Profile</MenuItem>
               <MenuItem onClick={() => navigate('/preferences')}>Edit Preferences</MenuItem>
               <MenuItem onClick={logout}>Logout</MenuItem>
             </MenuContent>
           </MenuRoot>
-        ) :  */}
+        ) : 
         <Box>
           <Button onClick={() => navigate('/register')}>Register</Button>
           <Button onClick={() => navigate('/login')}>Login</Button>
         </Box>
-        {/* } */}
+        }
 
         {/* Mobile Menu */}
         <Box display={{ base: 'block', md: 'none' }}>

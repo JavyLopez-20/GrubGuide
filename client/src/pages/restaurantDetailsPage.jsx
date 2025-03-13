@@ -7,14 +7,14 @@ import { Box,
     VStack,
     Spinner,
     Center,
-    Badge,
+    // Badge,
     Flex,
     Link as ChakraLink
 } from "@chakra-ui/react";
 
 
 const RestaurantDetails = () => {
-    const [business, setBusiness] = useState(null);
+    const [result, setResult] = useState(null);
     const { businessId } = useParams();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -30,12 +30,11 @@ const RestaurantDetails = () => {
             };
             setLoading(true);
             setError(null);
-            console.log('Fetching business details for ID:', businessId);
 
             try {
                 const response = await fetch(url, options);
                 const data = await response.json();
-                setBusiness(data);
+                setResult(data.businessId);
             } catch (err) {
                 setError(err.message);
             } finally {
@@ -58,7 +57,7 @@ const RestaurantDetails = () => {
             </Center>
         );
     }
-    if (!business) {
+    if (!businessId) {
         return (
             <Center minH="100vh">
                 <Text fontSize="lg">No Restaurant found</Text>
@@ -67,26 +66,26 @@ const RestaurantDetails = () => {
     }
     return (
         <Box minH="100vh" bg="gray.50" p={6}>
-            <VStack spacing={6} align="stretch"
-            maxW="800px" mx="auto">
+        <VStack spacing={6} align="stretch"
+        maxW="800px" mx="auto">
                 <Heading as="h1" size="2xl" 
                 color="teal.600">
-                    {business.name}
+                    {businessId.name}
                     </Heading>
                 <Image
-                    src={business.image_url}
-                    alt={business.name}
+                    src={businessId.image_url}
+                    alt={businessId.name}
                     borderRadius="lg"
                     boxShadow="md"
                     objectFit="cover"
-                    width="100%"
+                    width="200px"
                     maxH="400px"
-                />
-                <Text fontSize="lg" color="gray.600">{business.location.address1}, {business.location.city}</Text>
-                <Text fontSize="lg" color="gray.600">Rating: {business.rating}</Text>
-                <Text fontSize="lg" color="gray.600">Price: {business.price}</Text>
-                <Text fontSize="lg" color="gray.600">Phone: {business.phone} </Text>
-                <Text fontSize="lg" color="gray.600">Reviews: {business.review_count}</Text>
+                    />
+                <Text fontSize="lg" color="gray.600">{businessId.display_address}</Text>
+                <Text fontSize="lg" color="gray.600">Rating: {businessId.rating}</Text>
+                <Text fontSize="lg" color="gray.600">Price: {businessId.price}</Text>
+                <Text fontSize="lg" color="gray.600">Phone: {businessId.phone} </Text>
+                <Text fontSize="lg" color="gray.600">Reviews: {businessId.review_count}</Text>
                 <Text fontSize="lg" color="gray.600">Hours:</Text>
                 {business.hours && business.hours[0].open.map((hours, index) => (
                     <Text key={`${hours.day}-${index}`} fontSize="lg" color="gray.600">
@@ -95,7 +94,7 @@ const RestaurantDetails = () => {
                 ))}
                 <Text fontSize="lg" color="gray.600">Website: {business.url}</Text>
                 <Flex justifyContent="space-between" alignItems="center">
-                    <Badge colorScheme="green" fontSize="md">{business.categories.map((cat) => cat.title).join(', ')}</Badge>
+                    {/* <Badge colorScheme="green" fontSize="md">{business.categories.map((cat) => cat.title).join(', ')}</Badge> */}
                     <ChakraLink href={business.url} color="blue.500" isExternal>View on Yelp</ChakraLink>
                 </Flex>
             </VStack>

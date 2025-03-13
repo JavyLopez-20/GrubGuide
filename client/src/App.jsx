@@ -7,10 +7,11 @@ import SearchResults from "./pages/searchResultsPage";
 import UserProfile from "./pages/userPage";
 import RestaurantDetails from "./pages/restaurantDetailsPage";
 import Navbar from "./components/Navbar";
+import { AuthProvider } from "./components/Auth";
 
 const App = () => {
     return(
-        <>
+        <AuthProvider>
         <Navbar />
         <Routes>
             <Route path="/" element={<Home />} />
@@ -20,7 +21,7 @@ const App = () => {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/:id" element={<RestaurantDetails />} />
         </Routes>
-        </>
+        </AuthProvider>
     )
 };
 
