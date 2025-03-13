@@ -21,25 +21,18 @@ const RestaurantDetails = () => {
 
     useEffect(() => {
             const fetchBusinessDetails = async () => {
+            const url = `/api/business/${businessId}`;
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            };
             setLoading(true);
             setError(null);
-            const url = `https://api.yelp.com/v3/businesses/${businessId}`;
-            const options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true,
-            Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
-            }
-            };
+
             try {
                 const response = await fetch(url, options);
-                if (!response.ok) {
-                    const errorText = await response.text();
-                    throw new Error(`Failed to fetch business details: ${errorText} - ${response.statusText}`);
-                }
                 const data = await response.json();
                 setBusiness(data);
             } catch (err) {
@@ -94,8 +87,8 @@ const RestaurantDetails = () => {
                 <Text fontSize="lg" color="gray.600">Phone: {business.phone} </Text>
                 <Text fontSize="lg" color="gray.600">Reviews: {business.review_count}</Text>
                 <Text fontSize="lg" color="gray.600">Hours:</Text>
-                {business.hours && business.hours[0].open.map((hours) => (
-                    <Text key={hours.day} fontSize="lg" color="gray.600">
+                {business.hours && business.hours[0].open.map((hours, index) => (
+                    <Text key={`${hours.day}-${index}`} fontSize="lg" color="gray.600">
                         {`Day: ${hours.day}, Start: ${hours.start}, End: ${hours.end}`}
                     </Text>
                 ))}

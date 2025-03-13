@@ -1,18 +1,50 @@
-// import { createContext, useContext, useState } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
-// const AuthContext = createContext();
+export const AuthContext = createContext();
 
-// export const AuthProvider = ({ children }) => {
-//   const [user, setUser] = useState(null);
+export const AuthProvider = ({ children }) => {
+  // 1. Add token state for proper auth persistence
+  const [authState, setAuthState] = useState({
+    isLoggedIn: false,
+    token: null
+  });
 
-//   const login = (userData) => setUser(userData); // Set user on login
-//   const logout = () => setUser(null); // Clear user on logout
+  // 2. Initialize state from localStorage on mount
+  useEffect(() => {
+    const token = localStorage.getItem('authToken');
+    if (token) {
+      setAuthState({
+        isLoggedIn: true,
+        token: token
+      });
+    }
+  }, []);
 
-//   return (
-//     <AuthContext.Provider value={{ user, login, logout }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
+  // 3. Add login/logout functions
+  const login = (token) => {
+    localStorage.setItem('authToken', token);
+    setAuthState({
+      isLoggedIn: true,
+      token: token
+    });
+  };
 
-// export const useAuth = () => useContext(AuthContext);
+  const logout = () => {
+    localStorage.removeItem('authToken');
+    setAuthState({
+      isLoggedIn: false,
+      token: null
+    });
+  };
+
+  // 4. Provide full auth API to components
+  return (
+    <AuthContext.Provider value={{
+      ...authState,
+      login,
+      logout
+    }}>
+      {children}
+    </AuthContext.Provider>
+  );
+};

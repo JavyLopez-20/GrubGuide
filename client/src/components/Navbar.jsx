@@ -14,13 +14,11 @@ import {
   MenuTrigger,
 } from "../components/ui/menu"
   import { FaHamburger, FaSearch, FaUserCircle } from "react-icons/fa";
-//   import { useAuth } from "./Auth";
 
 
 const Navbar = () => {
     const [term, setTerm] = useState('');
     const [location, setLocation] = useState('');
-    // const { user, logout } = useAuth();
     const navigate = useNavigate();
 
     const handleSearchNearMe = async () => {
@@ -87,7 +85,7 @@ const Navbar = () => {
         {/* Login/Register Links */}
         </Flex>
       <Flex align="center">
-        {/* {user ? (
+        {/* {isLoggedIn ? (
           <MenuRoot>
             <MenuTrigger>
             <Button

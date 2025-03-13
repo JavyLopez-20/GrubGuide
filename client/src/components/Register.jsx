@@ -9,6 +9,8 @@ import {
 
 const Register = () => {
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -24,7 +26,7 @@ const Register = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ email, username, password }),
             });
             const data = await response.json();
             setData(data);
@@ -36,14 +38,34 @@ const Register = () => {
         setLoading(false);
     }
     return (
-        <Stack spacing={4} maxW="400px" mx="auto" mt={10} p={4}>
+        <Stack spacing={4} maxW="400px" mx="auto" mt="10" p={4}>
             <form onSubmit={handleSubmit}>
+                <Field.Root invalid={!!error}>
+                    <Field.Label>Username</Field.Label>
+                    <Input
+                        type="username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+                    <Field.ErrorText>{error}</Field.ErrorText>
+                </Field.Root>
                 <Field.Root invalid={!!error}>
                     <Field.Label>Email</Field.Label>
                     <Input
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                    <Field.ErrorText>{error}</Field.ErrorText>
+                </Field.Root>
+                <Field.Root invalid={!!error}>
+                    <Field.Label>Password</Field.Label>
+                    <Input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                         required
                     />
                     <Field.ErrorText>{error}</Field.ErrorText>

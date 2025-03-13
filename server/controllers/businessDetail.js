@@ -1,3 +1,5 @@
+const fetch = require('node-fetch');
+
 const businessDetail = async (req, res) => {
     const businessId = req.params.id;
     console.log('Fetching business details for ID:', businessId);
@@ -6,7 +8,7 @@ const businessDetail = async (req, res) => {
         const options = {
         method: 'GET',
         headers: {
-        Authorization: `Bearer ${process.env.REACT_APP_YELP_API_KEY}`
+        Authorization: `Bearer ${process.env.YELP_API_KEY}`
         }
     }
     try {

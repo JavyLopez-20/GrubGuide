@@ -15,6 +15,7 @@ import { Link } from 'react-router-dom';
 const Login = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
@@ -22,24 +23,19 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
         setError(null);
-
-        try {
             const response = await fetch(`/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ email }),
+                body: JSON.stringify({ email, password }),
             });
             const data = await response.json();
-            localStorage.setItem('user', JSON.stringify(data));
-            navigate('/');
-        }
-        catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
-        }
+            if (!response.ok) {
+                throw new Error(data.message || 'Login failed');
+            }
+            localStorage.setItem('authToken', data.token);
+            navigate('/profile');
     }
     return (
         <Box maxW="400px" mx="auto" mt={10} p={4}>
@@ -53,6 +49,16 @@ const Login = () => {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                        <Field.ErrorText>{error}</Field.ErrorText>
+                    </Field.Root>
+                    <Field.Root invalid={!!error}>
+                        <Field.Label>Password</Field.Label>
+                        <Input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             required
                         />
                         <Field.ErrorText>{error}</Field.ErrorText>
