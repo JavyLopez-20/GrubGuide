@@ -1,14 +1,14 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // 1. Add token state for proper auth persistence
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
+  const navigate = useNavigate();
 
-  // 2. Initialize state from localStorage on mount
   useEffect(() => {
     const token = localStorage.getItem('authToken');
     if (token) {
@@ -18,21 +18,21 @@ export const AuthProvider = ({ children }) => {
                 setIsLoggedIn(true);
                 setUserData(decoded);
               } else {
-                localStorage.removeItem('token'); // Remove expired token
+                localStorage.removeItem('token'); 
               }
             } catch (error) {
                 console.error('Invalid token:', error);
-                localStorage.removeItem('token'); // Remove invalid token
+                localStorage.removeItem('token');
         }
     }
   }, []);
 
-  // 3. Add login/logout functions
   const login = (token) => {
     localStorage.setItem('authToken', token);
     const decoded = jwtDecode(token);
     setIsLoggedIn(true);
     setUserData(decoded);
+    navigate("/");
   };
 
   const logout = () => {
@@ -40,9 +40,9 @@ export const AuthProvider = ({ children }) => {
     const decoded = removeItem('authToken');
     setIsLoggedIn(false);
     setUserData(null);
+    navigate('/');
   };
 
-  // 4. Provide full auth API to components
   return (
     <AuthContext.Provider value={{
         isLoggedIn,

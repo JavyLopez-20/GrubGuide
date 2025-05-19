@@ -1,15 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-    Box,
-    Heading,
-    Text,
-    VStack,
-    Input,
-    Button,
-    Link as ChakraLink,
-    Field,
-} from '@chakra-ui/react';
+import {Box, Heading, Text, VStack, Input, Button, Link as ChakraLink, Field,} from '@chakra-ui/react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from './Auth';
 
