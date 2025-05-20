@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Image, Text, Heading, Flex, Badge, VStack, Link as ChakraLink } from '@chakra-ui/react';
+import { Box, Image, Text, Heading, Flex, Badge, VStack, Link as ChakraLink, SimpleGrid } from '@chakra-ui/react';
 import { useSearchParams } from 'react-router-dom';
 import { Link as RouterLink } from 'react-router-dom';
 
@@ -39,7 +39,8 @@ const SearchResultsPage = () => {
 
 
   return (
-    <VStack spacing={4} p={4}>
+    <Box>
+    <SimpleGrid columns={4} gap='5px'>
         {results.map((business) => (
             <ChakraLink
             key={business.id}
@@ -85,7 +86,8 @@ const SearchResultsPage = () => {
             </ChakraLink>
         )
         )}
-    </VStack>
+    </SimpleGrid>
+    </Box>
   );
 };
 

@@ -27,7 +27,6 @@ const yelpAPI = async (req, res) => {
      }
     };
     module.exports = yelpAPI;
-//         const savedRestaurants = await Promise.all
 //         data.businesses.map(async (business) => {
 //             let restaurant = await Restaurant.findOne({ yelpId: business.id });
 //             if (!restaurant) {

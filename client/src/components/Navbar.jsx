@@ -1,21 +1,9 @@
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-    Box,
-    Flex,
-    Input,
-    Text,
-    Button,
-    IconButton,
-  } from '@chakra-ui/react';
-import {
-  MenuContent,
-  MenuItem,
-  MenuRoot,
-  MenuTrigger,
-} from "../components/ui/menu"
-  import { FaHamburger, FaSearch, FaUserCircle } from "react-icons/fa";
-  import { AuthContext } from "./Auth";
+import { Box, Flex, Input, Text, Button, IconButton,} from '@chakra-ui/react';
+import { MenuContent, MenuItem, MenuRoot, MenuTrigger,} from "../components/ui/menu"
+import { FaHamburger, FaSearch, FaUserCircle } from "react-icons/fa";
+import { AuthContext } from "./Auth";
 
 
 const Navbar = () => {
@@ -49,9 +37,8 @@ const Navbar = () => {
             alert('Please enter term and location')
         }
     };
-
     return(
-        <Box bg="teal.500" px={4} onSubmit={(e) => e.preventDefault()}>
+        <Box bg="#FD1C03" px={4} onSubmit={(e) => e.preventDefault()}>
       <Flex h={16} alignItems="center" justifyContent="space-between">
         {/* Logo */}
         <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>

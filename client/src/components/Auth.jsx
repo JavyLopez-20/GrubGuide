@@ -35,12 +35,11 @@ export const AuthProvider = ({ children }) => {
     navigate("/");
   };
 
-  const logout = () => {
-    localStorage.removeItem('authToken');
-    const decoded = removeItem('authToken');
-    setIsLoggedIn(false);
-    setUserData(null);
-    navigate('/');
+  const logout = async () => {
+      localStorage.removeItem('authToken');
+      setIsLoggedIn(false);
+      setUserData(null);
+      navigate('/');
   };
 
   return (
