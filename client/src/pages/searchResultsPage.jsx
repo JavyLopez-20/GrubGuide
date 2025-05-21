@@ -19,7 +19,7 @@ const SearchResultsPage = () => {
         setError(null);
         
         try {
-            const response = await fetch(`/results?term=${term}&location=${location}`);
+            const response = await fetch(`${process.env.REACT_APP}/api/results?term=${term}&location=${location}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch search results');
             }
