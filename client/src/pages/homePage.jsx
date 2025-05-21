@@ -1,4 +1,4 @@
-import { Box, Heading, SimpleGrid } from "@chakra-ui/react";
+import { Box, Heading, SimpleGrid, Link as ChakraLink } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import CuisineCard from "../components/Cuisinecard";
 import React from "react";
@@ -21,6 +21,7 @@ const Home = () => {
     {cuisines.map((cuisine, index) => (
             <motion.div
               key={cuisine.name}
+              to={`/`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}

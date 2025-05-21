@@ -86,7 +86,7 @@ const Navbar = () => {
             />
             </MenuTrigger>
             <Text color="white" ml={2}>
-              Welcome {userData.username}
+              Welcome 
             </Text>
             <MenuContent>
               <MenuItem onClick={() => navigate('/profile')}>View Profile</MenuItem>

@@ -1,11 +1,32 @@
-import React from 'react';
-import { Flex, Box, VStack, Heading, Avatar, Button } from '@chakra-ui/react';
+import React, { useContext, useState } from 'react';
+import { Flex, Box, VStack, Heading, Avatar, Button, Center, Text } from '@chakra-ui/react';
 import { FaUserEdit, FaUpload, FaCog, FaGift, FaSignOutAlt } from 'react-icons/fa';
+import { AuthContext } from '../components/Auth';
 
 const UserProfile = () => {
+  const { isLoggedIn } = useContext(AuthContext);
+  // const [profile, setProfile] = useState({ username: "", favorites: [] });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  if (!isLoggedIn) {
+    return (
+      <Center minH="100vh">
+        <Text fontSize="xl">Please log in to view your profile</Text>
+      </Center>
+    );
+  }
+
+  if (error) {
+    return (
+      <Center minH="100vh">
+        <Text color="red.500" fontSize="xl">{error}</Text>
+      </Center>
+    );
+  }
   return (
    <Flex minH="100vh" p={4} bg="gray.50">
-    <Box bg="teal.500" w="250px" p={4} borderRight="5px solid" borderColor="blackAlpha.200">
+    <Box bg="#FD1C03" w="250px" p={4} borderRight="5px solid" borderColor="blackAlpha.200">
       <Heading as="h2" size="lg" mb={4}>User Profile</Heading>
       <Avatar.Root>
       <Avatar.Fallback name="User" />
@@ -24,3 +45,35 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
+
+
+
+// useEffect(() => {
+  //   if (!isLoggedIn) {
+  //     setError("Please log in to view favorites");
+  //     setLoading(false);
+  //     return;
+  //   }
+  //   const fetchProfile = async () => {
+  //     try {
+  //       const token = localStorage.getItem("authToken");
+  //       const response = await fetch("/api/profile", {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: `Bearer ${token}`,
+  //         },
+  //       });
+  //       if (!response.ok) {
+  //         throw new Error("Failed to fetch Profile");
+  //       }
+  //       const data = await response.json();
+  //       setProfile(data);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchProfile();
+  // }, [isLoggedIn]);
