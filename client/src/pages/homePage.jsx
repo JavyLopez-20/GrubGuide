@@ -2,8 +2,10 @@ import { Box, Heading, SimpleGrid, Link as ChakraLink } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import CuisineCard from "../components/Cuisinecard";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
     const cuisines = [
       {name: "Italian", image: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?cs=srgb&dl=pexels-enginakyurt-1437267.jpg&fm=jpg", description: "In the mood for some Italian? Let's explore!"},
       {name: "Mexican", image: "https://wellfedbaker.com/wp-content/uploads/2024/04/tacos-de-carnitas-2.jpg", description: "Let's explore the many delicious dishes!"},
@@ -21,10 +23,11 @@ const Home = () => {
     {cuisines.map((cuisine, index) => (
             <motion.div
               key={cuisine.name}
-              to={`/`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.2 }}
+              onClick={() => navigate(`/cuisine/${cuisine.name.toLocaleLowerCase()}`)}
+              style={{ cursor: "pointer" }}
             >
               <CuisineCard
                 name={cuisine.name}
