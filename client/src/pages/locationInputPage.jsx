@@ -1,8 +1,8 @@
-import LocationInput from "../components/locationInput";
+import LocationInput from "../components/LocationInput";
 
 const LocationPage = () => {
     return(
         LocationInput()
     );
 };
-export default LocationPage;
+export default LocationPage
