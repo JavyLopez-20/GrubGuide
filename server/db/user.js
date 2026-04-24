@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     favorites: [{
         businessId: { type: String, required: true },
         name: { type: String, required: true },
-        image_url: String,
+        image_url: { type: String },
     }],
 });
 

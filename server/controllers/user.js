@@ -1,9 +1,9 @@
 const User = require('../db/user');
 
 exports.getProfile = async (req, res) => {
-  const { userId } = req.user;
+  const userId  = req.user;
   try {
-    const user = await User.findById(userId).select("username favorites");
+    const user = await User.findById(userId);
     if (!user) {
       console.log("User not found for ID:", userId);
       return res.status(404).json({ message: "User not found" });
@@ -43,7 +43,7 @@ exports.addFavorite = async (req, res) => {
 
 exports.removeFavorite = async (req, res) => {
   const { businessId } = req.params;
-  const { userId } = req.user?.id;
+  const userId  = req.user?.id;
 
   try {
     const user = await User.findById(userId);
