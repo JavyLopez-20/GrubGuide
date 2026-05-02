@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
               }
             } catch (error) {
                 console.error('Invalid token:', error);
-                localStorage.removeItem('token');
+                localStorage.removeItem('authToken', token);
         }
     }
   }, []);

@@ -1,7 +1,6 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../db/user');
-const Blacklist = require('../db/blacklist')
 
 
 exports.registerUser = async (req, res) => {
@@ -15,7 +14,7 @@ exports.registerUser = async (req, res) => {
     const hashPassword = await bcrypt.hash(req.body.password, salt);
     user = new User ({ email, password: hashPassword, username });
     await user.save();
-    console.log('User registered succesfully', user);
+    res.status(201).json({ message: "User registered succesfully" })
     }
     catch (error) {
         console.error('Error during registration:', error);
@@ -24,6 +23,7 @@ exports.registerUser = async (req, res) => {
 };
 
 exports.loginUser = async (req, res) => {
+    try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
         if (!user) {
@@ -35,8 +35,11 @@ exports.loginUser = async (req, res) => {
             console.log('User password does not match', user.email)
             return res.status(400).json({ message: 'Invalid credentials' })
         }
-        secretKey = process.env.JWT_SECRET;
+        const secretKey = process.env.JWT_SECRET;
 
         const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
         return res.json({ token });
+    } catch (error) {
+        res.status(500).json({ message: "Error logging in" })
+    }
 };

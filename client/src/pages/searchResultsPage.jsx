@@ -26,7 +26,7 @@ const SearchResultsPage = () => {
             const data = await response.json();
             setResults(data.businesses || []);
         } catch (err) {
-            setError(error.message)
+            setError(err.message)
         } finally {
             setLoading(false)
         }

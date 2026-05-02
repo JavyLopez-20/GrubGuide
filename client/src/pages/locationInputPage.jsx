@@ -2,7 +2,7 @@ import LocationInput from "../components/InputLocation";
 
 const LocationPage = () => {
     return(
-        LocationInput()
+        <LocationInput />
     );
 };
 export default LocationPage

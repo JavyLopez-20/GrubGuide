@@ -27,28 +27,3 @@ const yelpAPI = async (req, res) => {
      }
     };
     module.exports = yelpAPI;
-//         data.businesses.map(async (business) => {
-//             let restaurant = await Restaurant.findOne({ yelpId: business.id });
-//             if (!restaurant) {
-//                 restaurant = new Restaurant({
-//                     yelpId: business.id,
-//                         name: business.name,
-//                         address: business.location.address1,
-//                         city: business.location.city,
-//                         state: business.location.state,
-//                         zipCode: business.location.zip_code,
-//                         cuisine: business.categories.map((cat) => cat.title).join(', '),
-//                         rating: business.rating,
-//                         imageUrl: business.image_url,
-//                 });
-//                 await restaurant.save();
-//             }
-//             return restaurant;
-//         })
-//         res.json(savedRestaurants)
-
-//     } catch (error) {
-//         console.error("Error catching yelp api", error)
-//         res.status(500).json({ error: "Failed to fetch data" })
-
-// };

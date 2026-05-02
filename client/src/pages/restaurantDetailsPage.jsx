@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Box, Heading, Text, Image, Spinner, Button, Center, Flex, Link as ChakraLink, SimpleGrid} from "@chakra-ui/react";
 import { AuthContext } from "../components/Auth";
 
@@ -10,6 +10,7 @@ const RestaurantDetails = () => {
     const [error, setError] = useState(null);
     const [isFavorited, setIsFavorited] = useState(false)
     const { isLoggedIn } = useContext(AuthContext)
+    const { navigate } = useNavigate();
 
     useEffect(() => {
             const fetchBusinessDetails = async () => {
