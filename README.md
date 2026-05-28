@@ -1,6 +1,6 @@
 # GrubGuide 🍽️
 
-A full-stack restaurant finder web application that allows users to search 
+A full-stack restaurant finder web application that leverages FourSqauare api and allows users to search 
 for restaurants and cuisines by location. Users can manually enter a location 
 or use geolocation to automatically find restaurants nearby. Built with the 
 MERN stack and deployed on Render.
@@ -35,7 +35,7 @@ MERN stack and deployed on Render.
 - Express.js
 - JWT (jsonwebtoken) for authentication
 - Mongoose / MongoDB for data persistence
-- Yelp Fusion API for restaurant data
+- FourSquare API for restaurant data
 - dotenv for environment configuration
 
 **DevOps & Tools**
@@ -49,7 +49,7 @@ MERN stack and deployed on Render.
 ### Prerequisites
 - Node.js v18+
 - MongoDB Atlas account
-- Yelp Fusion API key
+- FourSquare API key
 
 ### Installation
 
@@ -81,7 +81,7 @@ The app will build the React client and start the Express server.
 |---|---|
 | MONGODB_URI | MongoDB Atlas connection string |
 | JWT_SECRET | Secret key for signing JWT tokens |
-| YELP_API_KEY | API key from Yelp Fusion Developer portal |
+| FOURSQUARE_API | API key from FourSquare |
 
 ---
 
@@ -91,7 +91,8 @@ The app will build the React client and start the Express server.
 |---|---|---|
 | POST | /api/auth/register | Register a new user |
 | POST | /api/auth/login | Login and receive JWT token |
-| GET | /api/results | Search and get results for restaurants via Yelp API |
+| GET | /api/results | Search and get results for restaurants via FourSquare API |
+| POST | /api/favorites/ | Add favorites to user if logged in
 
 ---
 
