@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "start": "NODE_OPTIONS=--max-old-space-size=4096 npm run client:build && npm run server",
-    "server": "NODE_OPTIONS=--max-old-space-size=4096 cd server && npm run start",
-    "client:build": "cd client && npm run build",
-    "build": "NODE_OPTIONS=--max-old-space-size=4096 cd client && npm run build",
-    "install": "cd server && npm i && cd ../client && npm i",
+    "start": "npm run server",
+    "server": "cd server && npm run start",
+    "build": "cd client && npm run build",
+    "install": "cd server && npm ci && cd ../client && npm ci",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Javier Lopez",
