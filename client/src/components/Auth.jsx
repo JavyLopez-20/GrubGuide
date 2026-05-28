@@ -18,11 +18,11 @@ export const AuthProvider = ({ children }) => {
                 setIsLoggedIn(true);
                 setUserData(decoded);
               } else {
-                localStorage.removeItem('token'); 
+                localStorage.removeItem('authToken'); 
               }
             } catch (error) {
                 console.error('Invalid token:', error);
-                localStorage.removeItem('authToken', token);
+                localStorage.removeItem('authToken');
         }
     }
   }, []);

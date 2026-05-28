@@ -7,34 +7,34 @@ import { AuthContext } from "./Auth";
 
 
 const Navbar = () => {
-    const [term, setTerm] = useState('');
-    const [location, setLocation] = useState('');
+    const [query, setQuery] = useState('');
+    const [near, setNear] = useState('');
     const navigate = useNavigate();
     const { isLoggedIn, userData, logout } = useContext(AuthContext);
 
-    const handleSearchNearMe = async () => {
-          if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            async (position) => {
-              const { latitude, longitude } = position.coords;
-                navigate(`/results?term=${term}&lat=${latitude}&lon=${longitude}`)
-          },
-          (error) => {
-            console.error('Error getting location:', error);
-        }
-        );
-      }
-      else {
-        alert('Geolocaton is not supported by this browser')
-      }
-    };
+    // const handleSearchNearMe = async () => {
+    //       if (navigator.geolocation) {
+    //       navigator.geolocation.getCurrentPosition(
+    //         async (position) => {
+    //           const { latitude, longitude } = position.coords;
+    //             navigate(`/results?query=${query}&lat=${lat}&long=${long}`)
+    //       },
+    //       (error) => {
+    //         console.error('Error getting location:', error);
+    //     }
+    //     );
+    //   }
+    //   else {
+    //     alert('Geolocaton is not supported by this browser')
+    //   }
+    // };
 
     const handleSearchByLocation = async () => {
-        if (term && location) {
-          navigate(`/results?term=${term}&location=${location}`)
+        if (query && near) {
+          navigate(`/results?query=${query}&near=${near}`)
         }
         else {
-            alert('Please enter term and location')
+            alert('Please enter name and location')
         }
     };
     return(
@@ -50,23 +50,23 @@ const Navbar = () => {
         <Flex alignItems="center" flex={1} mx={4}>
           <Input
             placeholder="Search restaurant or cuisine"
-            value={term}
-            onChange={(e) => setTerm(e.target.value)}
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
             bg="white"
             color="black"
             mr={2}
           />
           <Input
             placeholder="Enter location"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            value={near}
+            onChange={(e) => setNear(e.target.value)}
             bg="white"
             color="black"
             mr={2}
           />
-          <Button leftIcon={<FaSearch />} onClick={handleSearchNearMe} colorScheme="teal" variant="solid">
+          {/* <Button leftIcon={<FaSearch />} onClick={handleSearchNearMe} colorScheme="teal" variant="solid">
             Search Near Me
-          </Button>
+          </Button> */}
           <Button ml={2} onClick={handleSearchByLocation} colorScheme="teal" variant="outline">
             Search by Location
           </Button>

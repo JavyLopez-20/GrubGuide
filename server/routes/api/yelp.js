@@ -1,9 +1,9 @@
 const express = require('express');
-const yelpAPI = require('../../controllers/yelpAPI');
+const fourSquareAPI = require('../../controllers/yelpAPI');
 const businessDetail = require('../../controllers/businessDetail');
 const yelpRouter = express.Router();
 
-yelpRouter.get('/', yelpAPI);
+yelpRouter.get('/', fourSquareAPI);
 yelpRouter.get('/business/:id', businessDetail);
 
-module.exports = { yelpRouter };
+module.exports = yelpRouter;

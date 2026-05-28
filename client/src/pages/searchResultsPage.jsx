@@ -9,33 +9,34 @@ const SearchResultsPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const term = searchParams.get('term');
-  const location = searchParams.get('location');
+  const query = searchParams.get('query');
+  const near = searchParams.get('near');
 
   useEffect(() => {
     const fetchResults = async () => {
-        if (!term) return;
+        if (!query) return;
         setLoading(true);
         setError(null);
         
         try {
-            const response = await fetch(`/api/results?term=${term}&location=${location}`);
+            const response = await fetch(`/api/results?query=${query}&near=${near}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch search results');
             }
             const data = await response.json();
-            setResults(data.businesses || []);
-        } catch (err) {
-            setError(err.message)
+            setResults(data.results || []);
+        } catch (error) {
+            console.error(error)
+            setError(error.message)
         } finally {
             setLoading(false)
         }
     }
     fetchResults();
-  }, [term, location]);
+  }, [query, near]);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>
-  if (!term) return <p>Please provide term</p>
+  if (!query) return <p>Please provide query</p>
 
 
   return (
@@ -43,9 +44,9 @@ const SearchResultsPage = () => {
     <SimpleGrid columns={4} gap='5px'>
         {results.map((business) => (
             <ChakraLink
-            key={business.id}
+            key={business.fsq_place_id}
             as={RouterLink}
-            to={`/${business.id}`}
+            to={`/${business.fsq_place_id}`}
             _hover={{ textDecoration: 'none' }}
             >
             <Box
@@ -59,7 +60,7 @@ const SearchResultsPage = () => {
                 transition="all 0.2s"
             >
                 <Image
-                    src={business.image_url}
+                    // src={business.image_url}
                     alt={business.name}
                     fallbackSrc="https://via.placeholder.com/150"
                     objectFit="cover"
@@ -71,14 +72,14 @@ const SearchResultsPage = () => {
                         {business.name}
                     </Heading>
                     <Text fontSize="sm" color="gray.600">
-                        {business.location.address1}, {business.location.city}
+                        {business.location?.address}, {business.location?.post_town}
                     </Text>
                     <Flex justifyContent="space-between" alignItems="center" width="100%">
-                        <Badge colorScheme="green" fontSize="sm">
-                            {business.rating} stars
-                        </Badge>
-                        <ChakraLink href={business.url} color="blue.500" isExternal>
-                            View on Yelp
+                        {/* <Badge colorScheme="green" fontSize="sm">
+                            {business?.store_id} stars
+                        </Badge> */}
+                        <ChakraLink href={business?.website} color="blue.500" isExternal>
+                            View on website
                         </ChakraLink>
                     </Flex>
                 </VStack>

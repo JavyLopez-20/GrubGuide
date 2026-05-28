@@ -10,7 +10,7 @@ const RestaurantDetails = () => {
     const [error, setError] = useState(null);
     const [isFavorited, setIsFavorited] = useState(false)
     const { isLoggedIn } = useContext(AuthContext)
-    const { navigate } = useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
             const fetchBusinessDetails = async () => {
@@ -29,8 +29,8 @@ const RestaurantDetails = () => {
                 const data = await response.json();
                 console.log("API response", data)
                 setResult(data);
-            } catch (err) {
-                setError(err.message);
+            } catch (error) {
+                setError(error.message);
             } finally {
                 setLoading(false);
             }
@@ -50,8 +50,8 @@ const RestaurantDetails = () => {
               }
               const data = await response.json();
               setIsFavorited(data.isFavorited);
-            } catch (err) {
-              console.error("Error checking favorite status:", err);
+            } catch (error) {
+              console.error("Error checking favorite status:", error);
             }
           };
         fetchBusinessDetails();
@@ -77,7 +77,7 @@ const RestaurantDetails = () => {
               body: method === "POST" ? JSON.stringify({
                 businessId: id,
                 name: result.name,
-                image_url: result.image_url,
+                // image_url: result.image_url,
               }) : null,
             });
             if (!response.ok) {
@@ -85,8 +85,8 @@ const RestaurantDetails = () => {
             }
             setIsFavorited(!isFavorited);
             alert(isFavorited ? "Removed from favorites!" : "Added to favorites!");
-          } catch (err) {
-            console.error("Error:", err);
+          } catch (error) {
+            console.error("Error:", error);
             alert(`Failed to ${isFavorited ? "remove from" : "add to"} favorites`);
           }
         };
@@ -121,7 +121,7 @@ const RestaurantDetails = () => {
                     {result.name}
                     </Heading>
                 <Image
-                    src={result.image_url}
+                    // src={result.image_url}
                     alt={result.name}
                     borderRadius="lg"
                     boxShadow="md"
@@ -129,18 +129,13 @@ const RestaurantDetails = () => {
                     width="200px"
                     maxH="400px"
                     />
-                <Text fontSize="lg" color="gray.600">{result.display_address}</Text>
-                <Text fontSize="lg" color="gray.600">Rating: {result.rating}</Text>
-                <Text fontSize="lg" color="gray.600">Price: {result.price}</Text>
-                <Text fontSize="lg" color="gray.600">Phone: {result.phone} </Text>
-                <Text fontSize="lg" color="gray.600">Reviews: {result.review_count}</Text>
+                <Text fontSize="lg" color="gray.600">{result.location?.address}</Text>
+                <Text fontSize="lg" color="gray.600">Categories: {result.categories.map(categories => categories.name).join(', ')}</Text>
+                <Text fontSize="lg" color="gray.600">Distance: {result?.distance}</Text>
+                <Text fontSize="lg" color="gray.600">Phone: {result?.tel} </Text>
+                {/* <Text fontSize="lg" color="gray.600">Social Media: {result.social_media}</Text> */}
                 <Text fontSize="lg" color="gray.600">Hours:</Text>
-                {result.hours && result.hours[0].open.map((hours, index) => (
-                    <Text key={`${hours.day}-${index}`} fontSize="lg" color="gray.600">
-                        {`Day: ${hours.day}, Start: ${hours.start}, End: ${hours.end}`}
-                    </Text>
-                ))}
-                <Text fontSize="lg" color="gray.600">Website: <ChakraLink href={result.url} color="blue.500" isExternal>View on Yelp</ChakraLink></Text>
+                <Text fontSize="lg" color="gray.600">Website: <ChakraLink href={result?.website} color="blue.500" isExternal>View on website</ChakraLink></Text>
             {isLoggedIn && (
             <Button colorPalette={isFavorited ? "red" : "teal"}
             onClick={handleToggleFavorite}>

@@ -33,11 +33,13 @@ const Login = () => {
             e.preventDefault();
             setLoading(true);
             setError(null);
-            const credentials = {
-                email: e.target.value,
-                password: e.target.value,
-              };
-              handleLogin(credentials)
+            try {
+              handleLogin()
+            } catch(error) {
+                setError(error("Error logging in"))
+            } finally {
+                setLoading(fale)
+            }
         }
     return (
         <Box maxW="400px" mx="auto" mt={10} p={4}>

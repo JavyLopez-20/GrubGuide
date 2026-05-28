@@ -21,7 +21,7 @@ const App = () => {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/:id" element={<RestaurantDetails />} />
-            <Route path="/cuisine/:cuisineName" element={<LocationPage />} />
+            <Route path="/cuisine/:query" element={<LocationPage />} />
         </Routes>
         </AuthProvider>
     )

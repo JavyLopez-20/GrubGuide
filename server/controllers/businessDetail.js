@@ -1,18 +1,20 @@
-const fetch = require('node-fetch');
-
 const businessDetail = async (req, res) => {
     const businessId = req.params.id;
-    console.log('Fetching business details for ID:', businessId);
 
-    const url = `https://api.yelp.com/v3/businesses/${businessId}`;
+    const url = `https://places-api.foursquare.com/places/${businessId}`;
         const options = {
         method: 'GET',
         headers: {
-        Authorization: `Bearer ${process.env.YELP_API_KEY}`
+            'X-Places-Api-Version': '2025-06-17',
+                accept: 'application/json',
+        Authorization: `Bearer ${process.env.FOURSQUAREAPIKEY}`
         }
     }
     try {
         const response = await fetch(url, options);
+        if (!response.ok) {
+            throw new Error(`FourSquare API error: ${response.statusText}`);
+          };
         const data = await response.json();
         res.json(data);
     } catch (error) {
