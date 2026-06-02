@@ -77,7 +77,7 @@ const RestaurantDetails = () => {
               body: method === "POST" ? JSON.stringify({
                 businessId: id,
                 name: result.name,
-                // image_url: result.image_url,
+                image_url: result.image_url,
               }) : null,
             });
             if (!response.ok) {

@@ -62,9 +62,9 @@ const UserProfile = () => {
         <Button color="white" leftIcon={<FaSignOutAlt />} variant="ghost">Logout</Button>
       </VStack>
     </Box>
-    <Box bg="#0D0A09" borderColor="#F00A19" border="5px solid">
+    {/* <Box bg="#0D0A09" borderColor="#F00A19" border="5px solid">
       <Image src={profile.favorites.image_url} alt={"Image of cuisine"} />
-    </Box>
+    </Box> */}
     </Flex>
   );
 };

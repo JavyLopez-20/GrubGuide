@@ -38,7 +38,7 @@ const Login = () => {
             } catch(error) {
                 setError(error("Error logging in"))
             } finally {
-                setLoading(fale)
+                setLoading(false)
             }
         }
     return (
